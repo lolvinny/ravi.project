@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body style="font-family: Arial, Helvetica, sans-serifs">
+    <h1 id="regn_no">Welcome</h1>
+    <label for="regno">Registration Number:</label>
+    <input
+      type="text"
+      oninput="this.value = this.value.toUpperCase()"
+      id="vehNo"
+      maxlength="10"
+    />
+    <br />
+    <label for="Date">Date & Time:</label>
+    <input type="date" id="r_date" />
+    <input type="date" id="a_date" />
+    <input type="time" name="time" id="r_time" />
+
+    <select id="am_pm">
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </select>
+    <br />
+    <label for="chasis no.">Chasis no:</label>
+    <button id="chasis_b">Random</button>
+    <input type="text" id="chasis_r" /><br />
+
+    <label for="for days">No. of days</label>
+    <select name="days" id="taxdays">
+      <option value="180">180</option>
+      <option value="360">360</option>
+      <option value="540">540</option>
+      <option value="720">720</option>
+    </select>
+    <select name="amount" id="amountr">
+      <option value="ONE HUNDRED EIGHTY ONLY">ONE HUNDRED EIGHTY ONLY</option>
+      <option value="THREE HUNDRED SIXTY ONLY">THREE HUNDRED SIXTY ONLY</option>
+      <option value="FIVE HUNDRED FOURTY ONLY">FIVE HUNDRED FOURTY ONLY</option>
+      <option value="SEVEN HUNDRED TWENTY ONLY">
+        SEVEN HUNDRED TWENTY ONLY
+      </option>
+    </select>
+    <br />
+    <button onclick="saveData()">submit</button>
+    <script>
+      let vehNo;
+      let receipt_no;
+      let r_date;
+      let chasis_r;
+
+      function generateReceiptNumber() {
+        const inputDate = document.getElementById("r_date").value;
+        const dateParts = inputDate.split("-");
+
+        const year = dateParts[0];
+        const month = dateParts[1].padStart(2, "0");
+        const day = dateParts[2].padStart(2, "0");
+
+        const randomDigits = Math.random().toString().substr(2, 7);
+
+        return `UPT${year}${month}${day}${randomDigits}`;
+      }
+      function generateBankRefNo() {
+        const randomLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const allowedDigits = "179532";
+
+        let refNo = "";
+        for (let i = 0; i < 9; i++) {
+          refNo += randomLetters.charAt(
+            Math.floor(Math.random() * randomLetters.length)
+          );
+        }
+        refNo += allowedDigits.charAt(
+          Math.floor(Math.random() * allowedDigits.length)
+        );
+
+        return refNo;
+      }
+      function saveData() {
+        event.preventDefault();
+        const vehNo = document.getElementById("vehNo").value;
+        localStorage.setItem("vehNo", vehNo);
+
+        const chasis_r = document.getElementById("chasis_r").value;
+        localStorage.setItem("chasis_r", chasis_r);
+
+        const amountr = document.getElementById("amountr").value;
+        localStorage.setItem("amountr", amountr);
+
+        const a_date = document.getElementById("a_date").value;
+        localStorage.setItem("a_date", a_date);
+
+        const taxdays = document.getElementById("taxdays").value;
+        localStorage.setItem("taxdays", taxdays);
+
+        const receipt_no = generateReceiptNumber();
+        localStorage.setItem("receipt_no", receipt_no);
+        const bankRefNo = generateBankRefNo();
+        localStorage.setItem("bank_ref_no", bankRefNo);
+
+        const inputDate = document.getElementById("r_date").value;
+        const months = [
+          "JAN",
+          "FEB",
+          "MAR",
+          "APR",
+          "MAY",
+          "JUN",
+          "JUL",
+          "AUG",
+          "SEP",
+          "OCT",
+          "NOV",
+          "DEC",
+        ];
+        const dateParts = inputDate.split("-");
+        const monthIndex = parseInt(dateParts[1], 10) - 1;
+        const formattedDate = `${dateParts[2]}-${months[monthIndex]}-${dateParts[0]}`;
+        localStorage.setItem("r_date", formattedDate);
+
+        const r_time = document.getElementById("r_time").value;
+        localStorage.setItem("r_time", r_time);
+
+        const am_pm = document.getElementById("am_pm").value;
+        localStorage.setItem("am_pm", am_pm);
+
+        window.location.href = "Online Tax Payment Portal.html";
+      }
+      const taxDaysSelect = document.getElementById("taxdays");
+      const amountSelect = document.getElementById("amountr");
+
+      function updateAmountSelect() {
+        const selectedTaxDays = taxDaysSelect.value;
+        let amountIndex = 0; // Default to the first option
+
+        if (selectedTaxDays === "360") {
+          amountIndex = 1;
+        } else if (selectedTaxDays === "540") {
+          amountIndex = 2;
+        } else if (selectedTaxDays === "720") {
+          amountIndex = 3;
+        }
+
+        amountSelect.selectedIndex = amountIndex;
+      }
+
+      taxDaysSelect.addEventListener("change", updateAmountSelect);
+      const rDateInput = document.getElementById("r_date");
+      const aDateInput = document.getElementById("a_date");
+
+      function updateADate() {
+        const rDateValue = rDateInput.value;
+        aDateInput.value = rDateValue;
+      }
+      rDateInput.addEventListener("input", updateADate);
+
+      function generateChassisNumber() {
+        const prefix = "MBJAB3EM";
+        const randomDigits = Math.random().toString().substr(2, 9);
+        const randomFourDigit =
+          Math.floor(Math.random() * (1998 - 1050 + 1)) + 1050;
+
+        const chassisNumber = `${prefix}${randomDigits}~${randomFourDigit}`;
+        document.getElementById("chasis_r").value = chassisNumber;
+      }
+
+      const chassisButton = document.getElementById("chasis_b");
+      chassisButton.addEventListener("click", generateChassisNumber);
+    </script>
+  </body>
+</html>

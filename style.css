@@ -1,0 +1,49 @@
+/* styles.css */
+body {
+  font-family: "Roboto", sans-serif; /* Clean, modern sans-serif font */
+  background-color: #fff; /* Crisp white background */
+  color: #222; /* Dark, near-black text */
+  margin: 30px auto;
+  padding: 30px;
+  max-width: 600px; /* Limit form width for readability */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+h1 {
+  color: #34495e; /* Slightly lighter heading color */
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 300; /* Thinner heading weight */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500; /* Slightly bolder labels */
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%; /* Fields span full width */
+  padding: 10px;
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+button {
+  background-color: #3498db; /* Slightly muted blue */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}

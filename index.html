@@ -85,7 +85,7 @@
 
   return refNo; // You might still need to return it for other functionality
       }
-      const generatedRefNo = generateBankRefNo(); 
+    
 
       function saveData() {
         event.preventDefault();
@@ -107,7 +107,7 @@
         const receipt_no = generateReceiptNumber();
         localStorage.setItem("receipt_no", receipt_no);
         const bankRefNo = generateBankRefNo();
-        localStorage.setItem("generatedRefNo", generatedRefNo);
+        localStorage.setItem("bankRefNo", bankRefNo);
 
         const inputDate = document.getElementById("r_date").value;
         const months = [

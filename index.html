@@ -65,26 +65,7 @@
 
         return `UPT${year}${month}${day}${randomDigits}`;
       }
-      function generateBankRefNo() {
-  const prefix = "IGA"; // Fixed prefix
-  const randomLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const allowedDigits = "13579"; // Only allowed digits
-
-  let refNo = prefix; 
-
-  // Generate 6 random alphabets
-  for (let i = 0; i < 6; i++) { 
-    refNo += randomLetters.charAt(Math.floor(Math.random() * randomLetters.length));
-  }
-
-  // Generate 1 random digit from allowed digits
-  refNo += allowedDigits.charAt(Math.floor(Math.random() * allowedDigits.length));
-
-  // Update the span on Page 2
-  document.getElementById("br_no").textContent = refNo; 
-
-  return refNo; // You might still need to return it for other functionality
-}
+      
 
       function saveData() {
         event.preventDefault();
